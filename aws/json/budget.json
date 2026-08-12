@@ -1,0 +1,23 @@
+{
+    "BudgetName": "Example Budget",
+    "BudgetLimit": {
+        "Amount": "10",
+        "Unit": "USD"
+    },
+    "CostFilters": {},
+    "CostTypes": {
+        "IncludeTax": true,
+        "IncludeSubscription": true,
+        "UseBlended": false,
+        "IncludeRefund": false,
+        "IncludeCredit": false,
+        "IncludeUpfront": true,
+        "IncludeRecurring": true,
+        "IncludeOtherSubscription": true,
+        "IncludeDiscount": true,
+        "UseAmortized": false,
+        "IncludeSupport": true
+    },
+    "TimeUnit": "MONTHLY",
+    "BudgetType": "COST"
+}
