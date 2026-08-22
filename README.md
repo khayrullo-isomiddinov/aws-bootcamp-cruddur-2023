@@ -1,54 +1,33 @@
-## Creating a Billing Alarm
+# FREE AWS Cloud Project Bootcamp
 
-### Create SNS Topic
+- Application: Cruddur
+- Cohort: 2023-A1
 
-- We need an SNS topic before we create an alarm.
-- The SNS topic is what will delivery us an alert when we get overbilled
-- [aws sns create-topic](https://docs.aws.amazon.com/cli/latest/reference/sns/create-topic.html)
+This is the starting codebase that will be used in the FREE AWS Cloud Project Bootcamp 2023
 
-We'll create a SNS Topic
-```sh
-aws sns create-topic --name billing-alarm
-```
-which will return a TopicARN
+![Cruddur Graphic](_docs/assets/cruddur-banner.jpg)
 
-We'll create a subscription supply the TopicARN and our Email
-```sh
-aws sns subscribe \
-    --topic-arn TopicARN \
-    --protocol email \
-    --notification-endpoint your@email.com
-```
+![Cruddur Screenshot](_docs/assets/cruddur-screenshot.png)
 
-Check your email and confirm the subscription
+## Instructions
 
-#### Create Alarm
+At the start of the bootcamp you need to create a new Github Repository from this template.
 
-- [aws cloudwatch put-metric-alarm](https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-alarm.html)
-- [Create an Alarm via AWS CLI](https://aws.amazon.com/premiumsupport/knowledge-center/cloudwatch-estimatedcharges-alarm/)
-- We need to update the configuration json script with the TopicARN we generated earlier
-- We are just a json file because --metrics is is required for expressions and so its easier to us a JSON file.
+## Journaling Homework
 
-```sh
-aws cloudwatch put-metric-alarm --cli-input-json file://aws/json/alarm_config.json
-```
+The `/journal` directory contains
 
-## Create an AWS Budget
-
-[aws budgets create-budget](https://docs.aws.amazon.com/cli/latest/reference/budgets/create-budget.html)
-
-Get your AWS Account ID
-```sh
-aws sts get-caller-identity --query Account --output text
-```
-
-- Supply your AWS Account ID
-- Update the json files
-- This is another case with AWS CLI its just much easier to json files due to lots of nested json
-
-```sh
-aws budgets create-budget \
-    --account-id AccountID \
-    --budget file://aws/json/budget.json \
-    --notifications-with-subscribers file://aws/json/budget-notifications-with-subscribers.json
-```
+- [ ] [Week 0](journal/week0.md)
+- [ ] [Week 1](journal/week1.md)
+- [ ] [Week 2](journal/week2.md)
+- [ ] [Week 3](journal/week3.md)
+- [ ] [Week 4](journal/week4.md)
+- [ ] [Week 5](journal/week5.md)
+- [ ] [Week 6](journal/week6.md)
+- [ ] [Week 7](journal/week7.md)
+- [ ] [Week 8](journal/week8.md)
+- [ ] [Week 9](journal/week9.md)
+- [ ] [Week 10](journal/week10.md)
+- [ ] [Week 11](journal/week11.md)
+- [ ] [Week 12](journal/week12.md)
+- [ ] [Week 13](journal/week13.md)
