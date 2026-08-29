@@ -1,0 +1,16 @@
+[
+    {
+        "Notification": {
+            "NotificationType": "ACTUAL",
+            "ComparisonOperator": "GREATER_THAN",
+            "Threshold": 80,
+            "ThresholdType": "PERCENTAGE"
+        },
+        "Subscribers": [
+            {
+                "SubscriptionType": "EMAIL",
+                "Address": "khayrullo2@outlook.com"
+            }
+        ]
+    }
+]
