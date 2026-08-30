@@ -1,4 +1,4 @@
-# My AWS Project for Practice Purposes.  
+# Twitter Redone - My AWS Project.  
 
 ![Cruddur Graphic](_docs/assets/cruddur-banner.jpg)
 
