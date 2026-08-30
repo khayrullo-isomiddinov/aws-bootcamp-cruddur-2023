@@ -4,6 +4,9 @@ services:
     environment:
       FRONTEND_URL: "http://127.0.0.1:3000"
       BACKEND_URL: "http://127.0.0.1:4567"
+      OTEL_SERVICE_NAME: 'backend_flask'
+      OTEL_EXPORTER_OTLP_ENDPOINT: "https://api.honeycomb.io"
+      OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
     build: ./backend-flask
     ports:
       - "4567:4567"
