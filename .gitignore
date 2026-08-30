@@ -1,1 +1,5 @@
-docker
+docker/
+__pycache__/
+venv/
+node_modules/
+.env
