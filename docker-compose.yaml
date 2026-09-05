@@ -9,6 +9,7 @@ services:
       OTEL_EXPORTER_OTLP_HEADERS: "x-honeycomb-team=${HONEYCOMB_API_KEY}"
       AWS_XRAY_URL: "*127.0.0.1:4567*"
       AWS_XRAY_DAEMON_ADDRESS: "xray-daemon:2000"
+      ROLLBAR_ACCESS_TOKEN: "${ROLLBAR_ACCESS_TOKEN}"
     build: ./backend-flask
     ports:
       - "4567:4567"

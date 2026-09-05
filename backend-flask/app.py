@@ -30,6 +30,11 @@ from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
 import logging
 import watchtower
 
+# Rollbar ----------
+import rollbar
+import rollbar.contrib.flask
+from flask import got_request_exception
+
 # CloudWatch Logs ----------
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.DEBUG)
@@ -65,6 +70,20 @@ XRayMiddleware(app, xray_recorder)
 # Initialize automatic instrumentation with Flask
 FlaskInstrumentor().instrument_app(app)
 RequestsInstrumentor().instrument()
+
+# Rollbar ----------
+rollbar_access_token = os.getenv('ROLLBAR_ACCESS_TOKEN')
+rollbar.init(
+  rollbar_access_token,
+  # environment name (using 'production' for this stage, even though this is dev/local)
+  'production',
+  # server root directory, makes tracebacks prettier
+  root=os.path.dirname(os.path.realpath(__file__)),
+  # flask already sets up logging
+  allow_logging_basic_config=False
+)
+# send exceptions from `app` to rollbar, using flask's signal system.
+got_request_exception.connect(rollbar.contrib.flask.report_exception, app)
 
 
 frontend = os.getenv('FRONTEND_URL')
@@ -166,6 +185,10 @@ def data_activities_reply(activity_uuid):
   else:
     return model['data'], 200
   return
+
+@app.route('/api/rollbar/test')
+def rollbar_test():
+  return {"message": "hello world"}
 
 if __name__ == "__main__":
   app.run(debug=True)
