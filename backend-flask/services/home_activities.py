@@ -6,12 +6,15 @@ tracer = trace.get_tracer("home.activities")
 
 class HomeActivities:
 
-    def run():
+    def run(logger=None):
         with tracer.start_as_current_span("home-activities-data"):
             span = trace.get_current_span()
 
             now = datetime.now(timezone.utc).astimezone()
-            
+
+            if logger:
+                logger.info("HomeActivities.run: fetching home activities")
+
 
             results = [
                 {
