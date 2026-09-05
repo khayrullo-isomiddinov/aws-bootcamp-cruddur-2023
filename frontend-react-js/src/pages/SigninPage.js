@@ -3,8 +3,7 @@ import React from "react";
 import {ReactComponent as Logo} from '../components/svg/logo.svg';
 import { Link } from "react-router-dom";
 
-// [TODO] Authenication
-import Cookies from 'js-cookie'
+import { Auth } from 'aws-amplify';
 
 export default function SigninPage() {
 
@@ -15,12 +14,19 @@ export default function SigninPage() {
   const onsubmit = async (event) => {
     event.preventDefault();
     setErrors('')
-    console.log('onsubmit')
-    if (Cookies.get('user.email') === email && Cookies.get('user.password') === password){
-      Cookies.set('user.logged_in', true)
+    try {
+      const cognito_user = await Auth.signIn({
+        username: email,
+        password: password,
+      });
+      localStorage.setItem('access_token', cognito_user.signInUserSession.accessToken.jwtToken);
       window.location.href = "/"
-    } else {
-      setErrors("Email and password is incorrect or account doesn't exist")
+    } catch (error) {
+      if (error.code === 'UserNotConfirmedException') {
+        window.location.href = "/confirm"
+      } else {
+        setErrors(error.message)
+      }
     }
     return false
   }
